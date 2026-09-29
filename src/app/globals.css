@@ -172,43 +172,41 @@
   }
 }
 
-@layer utilities {
-  /* Small uppercase label above headings. */
-  .eyebrow {
-    @apply text-xs font-medium uppercase;
-    letter-spacing: 0.09em;
-  }
-  .tnum {
-    font-variant-numeric: tabular-nums;
-  }
-  /* Faint ledger rules, like a medical form. */
-  .ruled {
-    background-image: repeating-linear-gradient(
-      to bottom,
-      transparent 0,
-      transparent 31px,
-      var(--rule) 31px,
-      var(--rule) 32px
-    );
-  }
-  /* The "sealed" band that replaces a value on the lab's side of the glass. */
-  .hatch {
-    background-color: var(--seal-wash);
-    background-image: repeating-linear-gradient(
-      -45deg,
-      color-mix(in oklab, var(--seal) 28%, transparent) 0,
-      color-mix(in oklab, var(--seal) 28%, transparent) 1px,
-      transparent 1px,
-      transparent 6px
-    );
-  }
-  /* Perforated edge for consent slips. */
-  .perforation {
-    border-left: 1.5px dashed var(--border);
-  }
-  .perforation-top {
-    border-top: 1.5px dashed var(--border);
-  }
+/* Small uppercase label above headings. */
+@utility eyebrow {
+  @apply text-xs font-medium uppercase;
+  letter-spacing: 0.09em;
+}
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+}
+/* Faint ledger rules, like a medical form. */
+@utility ruled {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent 31px,
+    var(--rule) 31px,
+    var(--rule) 32px
+  );
+}
+/* The "sealed" band that replaces a value on the lab's side of the glass. */
+@utility hatch {
+  background-color: var(--seal-wash);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    color-mix(in oklab, var(--seal) 28%, transparent) 0,
+    color-mix(in oklab, var(--seal) 28%, transparent) 1px,
+    transparent 1px,
+    transparent 6px
+  );
+}
+/* Perforated edge for consent slips. */
+@utility perforation {
+  border-left: 1.5px dashed var(--border);
+}
+@utility perforation-top {
+  border-top: 1.5px dashed var(--border);
 }
 
 @keyframes seal-stamp {

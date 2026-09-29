@@ -739,6 +739,8 @@ const fr: Dictionary = {
       title: "Concevoir une étude",
       body: "Fixez des critères publics, voyez une estimation de cohorte en direct et approvisionnez le séquestre de récompenses. Aucun argent réel.",
       example: "Remplir un exemple",
+      exampleTitle: "Apnée du sommeil et tension au réveil",
+      exampleQuestion: "Les adultes atteints d’apnée du sommeil qui utilisent leur CPAP presque chaque nuit ont-ils une tension plus basse au réveil après 12 semaines ?",
       basics: "L’essentiel",
       titleLabel: "Titre de l’étude",
       titlePlaceholder: "p. ex. Apnée du sommeil et tension au réveil",

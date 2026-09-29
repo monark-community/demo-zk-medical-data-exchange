@@ -61,11 +61,11 @@ function ConnectWallet({
             type="button"
             data-slot="connect-wallet-trigger"
             className={cn(
-              "inline-flex items-center gap-3 rounded-lg border bg-card p-2 pr-3 text-card-foreground shadow-xs outline-hidden transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+              "inline-flex items-center gap-2.5 rounded-md border bg-card p-1.5 pr-2.5 text-card-foreground outline-hidden transition-colors hover:bg-muted",
               className
             )}
           >
-            <WalletAvatar address={address} size={32} />
+            <WalletAvatar address={address} size={28} />
             <div className="flex min-w-0 flex-col text-left leading-tight">
               {name && (
                 <span className="truncate text-sm font-medium">{name}</span>

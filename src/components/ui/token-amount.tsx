@@ -26,8 +26,10 @@ function formatBaseUnits(
     .padStart(decimals, "0")
     .slice(0, maxFractionDigits)
     .replace(/0+$/, "")
+  const sep =
+    new Intl.NumberFormat(locale).formatToParts(1.1).find((p) => p.type === "decimal")?.value ?? "."
   return fracStr
-    ? `${negative ? "-" : ""}${wholeStr}.${fracStr}`
+    ? `${negative ? "-" : ""}${wholeStr}${sep}${fracStr}`
     : `${negative ? "-" : ""}${wholeStr}`
 }
 

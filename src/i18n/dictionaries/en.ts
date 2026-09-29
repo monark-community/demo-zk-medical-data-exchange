@@ -738,6 +738,8 @@ const en = {
       title: "Design a study",
       body: "Set public criteria, see a live cohort estimate, and fund the reward escrow. Nothing here is real money.",
       example: "Fill an example",
+      exampleTitle: "Sleep apnea and morning blood pressure",
+      exampleQuestion: "Do adults with sleep apnea who use their CPAP most nights have lower morning blood pressure after 12 weeks?",
       basics: "Basics",
       titleLabel: "Study title",
       titlePlaceholder: "e.g. Sleep apnea and morning blood pressure",
