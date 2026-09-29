@@ -61,7 +61,6 @@ export function SiteFooter({ locale, dict, compact = false }: { locale: Locale; 
             <span aria-hidden="true" className="size-1.5 rounded-full bg-seal" />
             {c.demoNotice}
           </span>
-          <span>{c.sampleNotice}</span>
           <a
             href={MONARK_URL}
             target="_blank"

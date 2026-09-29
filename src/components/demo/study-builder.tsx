@@ -1,12 +1,12 @@
 "use client"
 
-import { InfoIcon, SparklesIcon } from "lucide-react"
+import { SparklesIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useMemo, useState, type ReactNode } from "react"
-import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
+import { InfoTip } from "@/components/ui/info-tip"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
@@ -174,10 +174,7 @@ export function StudyBuilder() {
       (r) => publishStudy(study, r),
       (hash) => logFailure("publish", hash, "lab")
     )
-    if (receipt) {
-      toast.success(t(a.lab.published_toast, { study: study.title.en }))
-      router.push(href(locale, "/app/lab"))
-    }
+    if (receipt) router.push(href(locale, "/app/lab"))
   }
 
   const busy = tx.state.phase === "signing" || tx.state.phase === "pending"
@@ -185,9 +182,7 @@ export function StudyBuilder() {
   return (
     <div className="space-y-8">
       <PageHead
-        eyebrow={b.eyebrow}
         title={b.title}
-        body={b.body}
         actions={
           <Button variant="outline" onClick={fillExample}>
             <SparklesIcon aria-hidden="true" />
@@ -227,7 +222,7 @@ export function StudyBuilder() {
             </FieldBox>
           </Card>
 
-          <Card title={b.criteria} hint={b.criteriaHint}>
+          <Card title={b.criteria} hint={b.criteriaHint} hintLabel={t(a.shell.moreInfo, { topic: b.criteria })}>
             <div>
               <div className="flex items-baseline justify-between">
                 <Label>{b.age}</Label>
@@ -347,7 +342,7 @@ export function StudyBuilder() {
             )}
           </Card>
 
-          <Card title={b.fields} hint={b.fieldsHint}>
+          <Card title={b.fields} hint={b.fieldsHint} hintLabel={t(a.shell.moreInfo, { topic: b.fields })}>
             <fieldset aria-invalid={!!err("fields")}>
               <legend className="sr-only">{b.fields}</legend>
               <div className="grid gap-2 sm:grid-cols-2">
@@ -465,21 +460,31 @@ export function StudyBuilder() {
           {b.publish}
         </Button>
         <TxFeedback state={tx.state} pendingLabel={b.funding} onRetry={publish} />
-        <p className="flex gap-2 text-xs text-muted-foreground">
-          <InfoIcon className="mt-px size-3.5 shrink-0 text-seal" aria-hidden="true" />
-          {copy.common.testnetNotice}
-        </p>
       </div>
     )
   }
 }
 
-function Card({ title, hint, children }: { title: string; hint?: string; children: ReactNode }) {
+function Card({
+  title,
+  hint,
+  hintLabel,
+  children,
+}: {
+  title: string
+  hint?: string
+  hintLabel?: string
+  children: ReactNode
+}) {
   return (
     <section className="rounded-lg border bg-card">
-      <div className="border-b px-5 py-3">
+      <div className="flex min-h-12 items-center gap-1 border-b px-5 py-2">
         <h2 className="font-sans text-sm font-semibold">{title}</h2>
-        {hint && <p className="mt-0.5 text-xs text-muted-foreground">{hint}</p>}
+        {hint && (
+          <InfoTip label={hintLabel ?? title} className="-my-1">
+            {hint}
+          </InfoTip>
+        )}
       </div>
       <div className="space-y-5 p-5">{children}</div>
     </section>

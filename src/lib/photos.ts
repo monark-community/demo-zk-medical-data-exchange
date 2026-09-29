@@ -27,6 +27,6 @@ export const PHOTOS: {
     photographer: "Tim Myrzakhan",
     profile: "https://unsplash.com/@myrz6han",
     page: "https://unsplash.com/photos/elderly-man-in-light-polo-shirt-K8yXdp7kAco",
-    usedOn: { en: "Home, governance", fr: "Accueil, gouvernance" },
+    usedOn: { en: "Home, “For contributors”", fr: "Accueil, « Pour les contributeurs »" },
   },
 ]

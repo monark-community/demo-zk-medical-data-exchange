@@ -27,7 +27,7 @@ export function CouncilView() {
 
   return (
     <div className="space-y-10">
-      <PageHead eyebrow={c.eyebrow} title={c.title} body={c.body} />
+      <PageHead title={c.title} info={c.info} />
 
       <section aria-labelledby="rules" className="rounded-lg border bg-card">
         <h2 id="rules" className="border-b px-5 py-3 font-sans text-sm font-semibold">
@@ -108,10 +108,7 @@ function OpenProposal({ proposal: p, canVote }: { proposal: Proposal; canVote: b
           { label: c.rowVote, value: v === "yes" ? c.yes : c.no },
         ],
       },
-      (receipt) => {
-        castVote(p.id, v, receipt)
-        toast.success(c.voted)
-      },
+      (receipt) => castVote(p.id, v, receipt),
       (hash) => logFailure("vote", hash, "patient")
     )
   }
@@ -182,7 +179,6 @@ function OpenProposal({ proposal: p, canVote }: { proposal: Proposal; canVote: b
             </p>
           )}
           <TxFeedback state={tx.state} />
-          {p.myVote && <p className="text-xs text-muted-foreground">{c.closeHint}</p>}
         </div>
       )}
     </article>

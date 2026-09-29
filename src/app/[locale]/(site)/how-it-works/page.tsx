@@ -2,6 +2,7 @@ import {
   ArrowDownIcon,
   ArrowRightIcon,
   CheckIcon,
+  ChevronRightIcon,
   FlaskConicalIcon,
   LandmarkIcon,
   SmartphoneIcon,
@@ -41,12 +42,11 @@ const CONTRACT = `interface ICuraConsent {
   event Revoked(bytes32 indexed consentId, uint64 atBlock);
 }`
 
-function SectionHead({ eyebrow, title, body }: { eyebrow: string; title: string; body?: string }) {
+function SectionHead({ title, body }: { title: string; body?: string }) {
   return (
     <div className="max-w-2xl">
-      <p className="eyebrow text-seal">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-medium sm:text-4xl">{title}</h2>
-      {body && <p className="mt-4 text-lg text-muted-foreground">{body}</p>}
+      <h2 className="text-3xl font-medium sm:text-4xl">{title}</h2>
+      {body && <p className="mt-3 text-lg text-muted-foreground">{body}</p>}
     </div>
   )
 }
@@ -65,8 +65,7 @@ export default async function HowItWorksPage({ params }: PageProps<"/[locale]/ho
     <>
       <section className="ruled border-b">
         <div className="mx-auto w-full max-w-6xl px-4 pt-14 pb-16 sm:px-6 lg:pt-20 lg:pb-20">
-          <p className="eyebrow text-seal">{h.hero.eyebrow}</p>
-          <h1 className="mt-4 max-w-3xl text-[2.5rem] leading-[1.05] font-medium sm:text-6xl">{h.hero.title}</h1>
+          <h1 className="max-w-3xl text-[2.5rem] leading-[1.05] font-medium sm:text-6xl">{h.hero.title}</h1>
           <p className="mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl">{h.hero.body}</p>
         </div>
       </section>
@@ -135,7 +134,7 @@ export default async function HowItWorksPage({ params }: PageProps<"/[locale]/ho
       {/* Worked proof */}
       <section className="border-b">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <SectionHead eyebrow={h.worked.eyebrow} title={h.worked.title} body={h.worked.body} />
+          <SectionHead title={h.worked.title} body={h.worked.body} />
           <div className="mt-10 overflow-hidden rounded-lg border bg-card">
             <table className="w-full text-sm">
               <thead className="border-b text-left">
@@ -193,7 +192,7 @@ export default async function HowItWorksPage({ params }: PageProps<"/[locale]/ho
       {/* Lifecycle */}
       <section className="border-b bg-card">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <SectionHead eyebrow={h.lifecycle.eyebrow} title={h.lifecycle.title} body={h.lifecycle.body} />
+          <SectionHead title={h.lifecycle.title} />
           <ol className="mt-10 grid gap-3 md:grid-cols-4">
             {h.lifecycle.states.map((s, i) => {
               const last = i === h.lifecycle.states.length - 1
@@ -220,7 +219,7 @@ export default async function HowItWorksPage({ params }: PageProps<"/[locale]/ho
       {/* Guardrails */}
       <section className="border-b">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <SectionHead eyebrow={h.guardrails.eyebrow} title={h.guardrails.title} />
+          <SectionHead title={h.guardrails.title} />
           <div className="mt-10 grid gap-x-10 gap-y-8 md:grid-cols-2">
             {h.guardrails.items.map((g) => (
               <div key={g.title} className="border-t pt-5">
@@ -235,7 +234,7 @@ export default async function HowItWorksPage({ params }: PageProps<"/[locale]/ho
       {/* Regulation */}
       <section className="border-b bg-card">
         <div className="mx-auto grid w-full max-w-6xl gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2 lg:py-20">
-          <SectionHead eyebrow={h.regulation.eyebrow} title={h.regulation.title} body={h.regulation.body} />
+          <SectionHead title={h.regulation.title} />
           <div>
             <dl className="rounded-lg border bg-background">
               {h.regulation.items.map((r) => (
@@ -253,35 +252,38 @@ export default async function HowItWorksPage({ params }: PageProps<"/[locale]/ho
       {/* Developers */}
       <section className="border-b">
         <div className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6 lg:py-20">
-          <SectionHead eyebrow={h.developers.eyebrow} title={h.developers.title} body={h.developers.body} />
-          <div className="mt-10 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
-            <pre
-              tabIndex={0}
-              className="overflow-x-auto rounded-lg border bg-[#16211c] p-5 font-mono text-[0.8125rem] leading-relaxed text-[#e9e4d8] dark:bg-card"
-            >
-              <code>{CONTRACT}</code>
-            </pre>
-            <div className="rounded-lg border bg-card">
-              <h3 className="border-b px-5 py-3 font-sans text-sm font-semibold">{h.developers.mapTitle}</h3>
-              <ul>
-                {h.developers.map.map((m) => (
-                  <li key={m.demo} className="border-b border-rule px-5 py-3 last:border-b-0">
-                    <code className="font-mono text-sm text-primary">{m.demo}</code>
-                    <p className="mt-0.5 text-sm text-muted-foreground">{m.real}</p>
-                  </li>
-                ))}
-              </ul>
+          <SectionHead title={h.developers.title} body={h.developers.body} />
+          <details className="group mt-8">
+            <summary className="inline-flex cursor-pointer list-none items-center gap-1.5 rounded-md text-sm font-medium text-primary underline-offset-4 hover:underline focus-visible:ring-3 focus-visible:ring-ring/50 focus-visible:outline-none [&::-webkit-details-marker]:hidden">
+              <ChevronRightIcon className="size-4 transition-transform group-open:rotate-90" aria-hidden="true" />
+              {h.developers.show}
+            </summary>
+            <div className="mt-6 grid gap-6 lg:grid-cols-[1.3fr_1fr]">
+              <pre
+                tabIndex={0}
+                className="overflow-x-auto rounded-lg border bg-[#16211c] p-5 font-mono text-[0.8125rem] leading-relaxed text-[#e9e4d8] dark:bg-card"
+              >
+                <code>{CONTRACT}</code>
+              </pre>
+              <div className="rounded-lg border bg-card">
+                <h3 className="border-b px-5 py-3 font-sans text-sm font-semibold">{h.developers.mapTitle}</h3>
+                <ul>
+                  {h.developers.map.map((m) => (
+                    <li key={m.demo} className="border-b border-rule px-5 py-3 last:border-b-0">
+                      <code className="font-mono text-sm text-primary">{m.demo}</code>
+                      <p className="mt-0.5 text-sm text-muted-foreground">{m.real}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-          </div>
+          </details>
         </div>
       </section>
 
       <section className="bg-primary text-primary-foreground">
         <div className="mx-auto flex w-full max-w-6xl flex-col items-start gap-6 px-4 py-14 sm:px-6 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-3xl font-medium">{h.cta.title}</h2>
-            <p className="mt-2 text-primary-foreground/85">{h.cta.body}</p>
-          </div>
+          <h2 className="text-3xl font-medium">{h.cta.title}</h2>
           <Button asChild size="lg" variant="paper">
             <Link href={href(locale, "/app")}>
               {h.cta.button}

@@ -3,9 +3,9 @@
 import { ArrowLeftIcon, ArrowRightIcon, CheckIcon, CircleIcon, KeyRoundIcon, Loader2Icon, RotateCcwIcon } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
-import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
+import { InfoTip } from "@/components/ui/info-tip"
 import { Progress } from "@/components/ui/progress"
 import { href } from "@/i18n/config"
 import { t } from "@/i18n/t"
@@ -87,9 +87,13 @@ export function StudyView({ id }: { id: string }) {
             <p className="mt-2 font-serif text-xl leading-snug">{l10n(study.question, locale)}</p>
           </section>
           <section>
-            <h2 className="font-sans text-sm font-semibold">{a.study.criteria}</h2>
-            <p className="mt-1 text-sm text-muted-foreground">{a.study.criteriaNote}</p>
-            <ol className="mt-3 divide-y divide-rule rounded-lg border bg-card">
+            <div className="flex items-center gap-1">
+              <h2 className="font-sans text-sm font-semibold">{a.study.criteria}</h2>
+              <InfoTip label={t(a.shell.moreInfo, { topic: a.study.criteria })} className="-my-1">
+                {a.study.criteriaNote}
+              </InfoTip>
+            </div>
+            <ol className="mt-2 divide-y divide-rule rounded-lg border bg-card">
               {study.criteria.map((c, i) => (
                 <li key={i} className="flex items-center gap-3 px-4 py-3 text-[0.9375rem]">
                   <span className="tnum w-5 font-serif text-seal italic" aria-hidden="true">
@@ -101,9 +105,13 @@ export function StudyView({ id }: { id: string }) {
             </ol>
           </section>
           <section>
-            <h2 className="font-sans text-sm font-semibold">{a.study.asks}</h2>
-            <p className="mt-1 text-sm text-muted-foreground">{a.study.asksNote}</p>
-            <ul className="mt-3 flex flex-wrap gap-2">
+            <div className="flex items-center gap-1">
+              <h2 className="font-sans text-sm font-semibold">{a.study.asks}</h2>
+              <InfoTip label={t(a.shell.moreInfo, { topic: a.study.asks })} className="-my-1">
+                {a.study.asksNote}
+              </InfoTip>
+            </div>
+            <ul className="mt-2 flex flex-wrap gap-2">
               {study.fields.map((f) => (
                 <li key={f} className="rounded-sm border bg-card px-2.5 py-1 text-sm">
                   {labels.fields[f]}
@@ -196,10 +204,7 @@ function ProofPanel({ study }: { study: Study }) {
       (receipt) => enrol(study, fields, proof, receipt),
       (hash) => logFailure("enrol", hash, "patient")
     )
-    if (r) {
-      setJustEnrolled(true)
-      toast.success(t(a.slip.enrolledToast, { study: l10n(study.title, locale) }))
-    }
+    if (r) setJustEnrolled(true)
   }
 
   // Already enrolled (or enrolled before): the nullifier blocks a second enrolment.
@@ -231,16 +236,16 @@ function ProofPanel({ study }: { study: Study }) {
 
   return (
     <section aria-labelledby="check-title" className="space-y-4 rounded-lg border bg-card p-5">
-      <div className="flex items-start gap-3">
+      <div className="flex items-center gap-3">
         <span className="grid size-9 shrink-0 place-items-center rounded-full border border-seal/50 bg-seal-wash text-seal">
           <KeyRoundIcon className="size-4" aria-hidden="true" />
         </span>
-        <div>
-          <h2 id="check-title" className="text-xl font-medium">
-            {p.title}
-          </h2>
-          <p className="mt-1 text-sm text-muted-foreground">{p.body}</p>
-        </div>
+        <h2 id="check-title" className="text-xl font-medium">
+          {p.title}
+        </h2>
+        <InfoTip label={t(a.shell.moreInfo, { topic: p.title })} className="-ml-2">
+          {p.info}
+        </InfoTip>
       </div>
 
       {check.phase === "idle" && (
@@ -306,7 +311,6 @@ function ProofPanel({ study }: { study: Study }) {
                   },
                 }}
               />
-              <p className="text-xs text-muted-foreground">{a.slip.submitHint}</p>
               <Button
                 size="lg"
                 className="w-full"

@@ -40,7 +40,7 @@ export function StudiesView() {
 
   return (
     <div className="space-y-6">
-      <PageHead eyebrow={s.eyebrow} title={s.title} body={s.body} />
+      <PageHead title={s.title} info={s.info} />
       <div className="grid gap-3 sm:grid-cols-2 lg:max-w-xl">
         <div className="space-y-1.5">
           <Label htmlFor="f-condition">{s.filterCondition}</Label>

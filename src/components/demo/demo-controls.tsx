@@ -81,9 +81,7 @@ export function DemoControls() {
           />
           <ThemeToggle label={copy.common.theme.toggle} />
         </div>
-        <p className="mt-auto text-xs text-muted-foreground">
-          {copy.common.demoNotice} · {copy.common.sampleNotice}
-        </p>
+        <p className="mt-auto text-xs text-muted-foreground">{copy.common.sampleNotice}</p>
       </SheetContent>
     </Sheet>
   )

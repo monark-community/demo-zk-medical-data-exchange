@@ -277,8 +277,8 @@ function proposals(now: number): Proposal[] {
         fr: "Faire passer la taille minimale de cohorte de 10 à 20",
       },
       summary: {
-        en: "Labs would see cohort estimates only when at least 20 vaults match, making it harder to single out someone with a rare combination of conditions.",
-        fr: "Les labos ne verraient une estimation de cohorte que si au moins 20 coffres correspondent, ce qui rend plus difficile d’isoler une personne ayant une combinaison rare de conditions.",
+        en: "Labs would see estimates only when at least 20 vaults match.",
+        fr: "Les labos ne verraient une estimation qu’à partir de 20 coffres correspondants.",
       },
       status: "open",
       yes: 1284,
@@ -294,8 +294,8 @@ function proposals(now: number): Proposal[] {
         fr: "Exiger un consentement distinct pour l’entraînement de modèles d’IA",
       },
       summary: {
-        en: "Studies that train machine-learning models on consented fields would have to show a second, unticked checkbox on the consent slip.",
-        fr: "Les études qui entraînent des modèles d’apprentissage automatique sur les champs consentis devraient afficher une deuxième case, non cochée, sur le bon de consentement.",
+        en: "Model training would need a second, unticked box on the slip.",
+        fr: "L’entraînement de modèles exigerait une deuxième case, non cochée, sur le bon.",
       },
       status: "open",
       yes: 2106,

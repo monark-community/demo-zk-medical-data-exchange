@@ -1,6 +1,6 @@
 "use client"
 
-import { EyeOffIcon, FilePlus2Icon } from "lucide-react"
+import { FilePlus2Icon } from "lucide-react"
 import Link from "next/link"
 
 import { Badge } from "@/components/ui/badge"
@@ -33,7 +33,7 @@ export function LabOverview() {
 
   return (
     <div className="space-y-8">
-      <PageHead eyebrow={l.eyebrow} title={l.title} body={l.body} actions={newBtn} />
+      <PageHead title={l.title} info={l.info} actions={newBtn} />
       <div className="grid gap-3 sm:grid-cols-3">
         <StatTile label={l.balance}>
           <TokenAmount
@@ -58,7 +58,7 @@ export function LabOverview() {
         <StatTile label={l.participants}>{formatNumber(locale, participants)}</StatTile>
       </div>
 
-      <div className="grid gap-8 xl:grid-cols-[1fr_300px]">
+      <div>
         {mine.length === 0 ? (
           <Empty action={newBtn}>{l.empty}</Empty>
         ) : (
@@ -107,19 +107,6 @@ export function LabOverview() {
             </table>
           </div>
         )}
-        <aside className="h-fit rounded-lg border bg-card p-5">
-          <h2 className="flex items-center gap-2 font-sans text-sm font-semibold">
-            <EyeOffIcon className="size-4 text-seal" aria-hidden="true" />
-            {l.privacy}
-          </h2>
-          <ul className="mt-3 space-y-2.5 text-sm text-muted-foreground">
-            {l.privacyItems.map((item) => (
-              <li key={item} className="border-b border-rule pb-2.5 last:border-b-0 last:pb-0">
-                {item}
-              </li>
-            ))}
-          </ul>
-        </aside>
       </div>
     </div>
   )

@@ -1,9 +1,8 @@
 "use client"
 
-import { ArrowRightIcon, InfoIcon, ScissorsIcon, SlidersHorizontalIcon, WalletIcon } from "lucide-react"
+import { ArrowRightIcon, ScissorsIcon, SlidersHorizontalIcon, WalletIcon } from "lucide-react"
 import Link from "next/link"
 import { useState } from "react"
-import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -47,17 +46,14 @@ export function ConsentsView() {
   async function claim() {
     await claimTx.run(
       { title: c.claimTitle, rows: [{ label: c.claimRow, value: `${formatToken(locale, amount)} tUSDC` }], movesValue: true },
-      (receipt) => {
-        claimRewards(receipt)
-        toast.success(t(c.claimed, { amount: formatToken(locale, amount) }))
-      },
+      (receipt) => claimRewards(receipt),
       (hash) => logFailure("claim", hash, "patient")
     )
   }
 
   return (
     <div className="space-y-10">
-      <PageHead eyebrow={c.eyebrow} title={c.title} body={c.body} />
+      <PageHead title={c.title} info={c.info} />
 
       <section aria-labelledby="rewards" className="rounded-lg border bg-card">
         <h2 id="rewards" className="border-b px-5 py-3 font-sans text-sm font-semibold">
@@ -95,14 +91,12 @@ export function ConsentsView() {
             {c.claim}
           </Button>
         </div>
-        <div className="space-y-3 border-t border-rule px-5 py-3">
-          {amount <= 0 && claimTx.state.phase === "idle" && <p className="text-sm text-muted-foreground">{c.nothing}</p>}
-          <TxFeedback state={claimTx.state} onRetry={claim} />
-          <p className="flex gap-2 text-xs text-muted-foreground">
-            <InfoIcon className="mt-px size-3.5 shrink-0 text-seal" aria-hidden="true" />
-            {copy.common.testnetNotice}
-          </p>
-        </div>
+        {(amount <= 0 || claimTx.state.phase !== "idle") && (
+          <div className="space-y-3 border-t border-rule px-5 py-3">
+            {amount <= 0 && claimTx.state.phase === "idle" && <p className="text-sm text-muted-foreground">{c.nothing}</p>}
+            <TxFeedback state={claimTx.state} onRetry={claim} />
+          </div>
+        )}
       </section>
 
       <section aria-labelledby="active-slips" className="space-y-4">
@@ -187,10 +181,7 @@ function ActiveSlip({ consent, study, onRevoked }: { consent: Consent; study: St
           { label: a.slip.rowFields, value: fields.map((f) => labels.fields[f]).join(", ") },
         ],
       },
-      (receipt) => {
-        narrowConsent(consent.id, fields, receipt)
-        toast.success(t(c.narrowed, { count: fields.length }))
-      },
+      (receipt) => narrowConsent(consent.id, fields, receipt),
       (hash) => logFailure("narrow", hash, "patient")
     )
   }
@@ -203,7 +194,6 @@ function ActiveSlip({ consent, study, onRevoked }: { consent: Consent; study: St
         setTearing(true)
         onRevoked()
         revokeConsent(consent.id, receipt)
-        toast(c.revoked)
       },
       (hash) => logFailure("revoke", hash, "patient")
     )

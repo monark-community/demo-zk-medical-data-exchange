@@ -23,8 +23,7 @@ export default async function NotFound() {
       <main id="main" tabIndex={-1} className="flex flex-1 flex-col outline-none">
         <section className="ruled mx-auto flex w-full max-w-2xl flex-1 flex-col items-start justify-center px-4 py-20 sm:px-6">
           <CuraMark className="size-12 text-seal" />
-          <p className="eyebrow mt-8 text-seal">{c.notFound.eyebrow}</p>
-          <h1 className="mt-3 text-4xl font-medium sm:text-5xl">{c.notFound.title}</h1>
+          <h1 className="mt-8 text-4xl font-medium sm:text-5xl">{c.notFound.title}</h1>
           <p className="mt-4 max-w-lg text-lg text-muted-foreground">{c.notFound.body}</p>
           <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
             <Button asChild size="lg">

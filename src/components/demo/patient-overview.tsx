@@ -20,13 +20,13 @@ export function PatientOverview() {
   const o = a.overview
   if (!state) return null
   const active = state.consents.filter((c) => c.status === "active").length
-  const suggested = state.studies.filter((s) => s.status === "open" && !consentFor(state, s.id)).slice(0, 3)
+  const suggested = state.studies.filter((s) => s.status === "open" && !consentFor(state, s.id)).slice(0, 2)
   const tourLinks = ["/app/studies/t2d-home-bp", "/app/vault", "/app/consents"]
   const link = "inline-flex items-center gap-1.5 text-sm font-medium text-primary underline-offset-4 hover:underline"
 
   return (
     <div className="space-y-10">
-      <PageHead eyebrow={o.eyebrow} title={o.title} />
+      <PageHead title={o.title} />
 
       <div className="grid gap-3 sm:grid-cols-3">
         <StatTile label={o.records} href={href(locale, "/app/vault")}>
@@ -53,16 +53,13 @@ export function PatientOverview() {
         </h2>
         <ol className="mt-4 grid gap-4 sm:grid-cols-3">
           {o.tour.map((step, i) => (
-            <li key={step.title} className="flex gap-3">
+            <li key={step} className="flex items-baseline gap-3">
               <span className="tnum font-serif text-2xl leading-none text-seal italic" aria-hidden="true">
                 {i + 1}
               </span>
-              <div>
-                <Link href={href(locale, tourLinks[i] ?? "/app")} className="font-medium underline-offset-4 hover:underline">
-                  {step.title}
-                </Link>
-                <p className="mt-1 text-sm text-muted-foreground">{step.body}</p>
-              </div>
+              <Link href={href(locale, tourLinks[i] ?? "/app")} className="font-medium underline-offset-4 hover:underline">
+                {step}
+              </Link>
             </li>
           ))}
         </ol>
@@ -70,18 +67,15 @@ export function PatientOverview() {
 
       <section aria-labelledby="suggested">
         <div className="flex flex-wrap items-end justify-between gap-3">
-          <div>
-            <h2 id="suggested" className="text-2xl font-medium">
-              {o.suggested}
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">{o.suggestedBody}</p>
-          </div>
+          <h2 id="suggested" className="text-2xl font-medium">
+            {o.suggested}
+          </h2>
           <Link href={href(locale, "/app/studies")} className={link}>
             {o.browse}
             <ArrowRightIcon className="size-4" aria-hidden="true" />
           </Link>
         </div>
-        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div className="mt-5 grid gap-3 md:grid-cols-2">
           {suggested.map((s) => (
             <StudyCard key={s.id} state={state} study={s} />
           ))}
@@ -99,7 +93,7 @@ export function PatientOverview() {
           </Link>
         </div>
         <div className="mt-4">
-          <ActivityList state={state} entries={state.activity.filter((e) => e.role === "patient").slice(0, 4)} />
+          <ActivityList state={state} entries={state.activity.filter((e) => e.role === "patient").slice(0, 2)} />
         </div>
       </section>
     </div>

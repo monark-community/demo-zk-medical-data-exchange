@@ -139,7 +139,6 @@ export function ConsentSlip({
         <span aria-hidden="true" className="absolute -bottom-2 -left-2 hidden size-4 rounded-full border bg-background sm:block" />
         <SealStamp size="sm" className={cn(ended && "border-muted-foreground text-muted-foreground [&>span]:border-muted-foreground/60")} />
         <div className="min-w-0 space-y-1.5 text-xs">
-          <p className="eyebrow text-muted-foreground">{s.stub}</p>
           <dl className="space-y-1.5">
           {proofId && (
             <div>

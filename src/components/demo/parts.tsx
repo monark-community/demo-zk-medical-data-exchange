@@ -17,6 +17,7 @@ import Link from "next/link"
 import type { ReactNode } from "react"
 
 import { Badge } from "@/components/ui/badge"
+import { InfoTip } from "@/components/ui/info-tip"
 import { href } from "@/i18n/config"
 import { t } from "@/i18n/t"
 import { shortHex } from "@/lib/demo/ids"
@@ -26,23 +27,18 @@ import { cn } from "@/lib/utils"
 
 import { describeCriterion, l10n, useCopy } from "./app-context"
 
-export function PageHead({
-  eyebrow,
-  title,
-  body,
-  actions,
-}: {
-  eyebrow: string
-  title: string
-  body?: string
-  actions?: ReactNode
-}) {
+/** Page title; the page's "why" sits behind an info icon (context on demand). */
+export function PageHead({ title, info, actions }: { title: string; info?: string; actions?: ReactNode }) {
+  const { a } = useCopy()
   return (
     <div className="flex flex-col gap-4 border-b pb-6 sm:flex-row sm:items-end sm:justify-between">
-      <div className="max-w-2xl">
-        <p className="eyebrow text-seal">{eyebrow}</p>
-        <h1 className="mt-2 text-3xl leading-tight font-medium sm:text-4xl">{title}</h1>
-        {body && <p className="mt-3 text-muted-foreground">{body}</p>}
+      <div className="flex max-w-2xl items-center gap-1.5">
+        <h1 className="text-3xl leading-tight font-medium sm:text-4xl">{title}</h1>
+        {info && (
+          <InfoTip label={a.shell.about} className="mt-1">
+            {info}
+          </InfoTip>
+        )}
       </div>
       {actions && <div className="flex shrink-0 flex-wrap gap-2">{actions}</div>}
     </div>
@@ -93,9 +89,11 @@ export function StudyStatusBadge({ state, study }: { state: DemoState; study: St
   return null
 }
 
-export function EnrolmentBar({ study }: { study: Study }) {
+/** Enrolment progress. `compact` (study cards) keeps the count for screen readers and the tooltip only. */
+export function EnrolmentBar({ study, compact = false }: { study: Study; compact?: boolean }) {
   const { a, locale } = useCopy()
   const pct = Math.min(100, Math.round((study.enrolled / study.target) * 100))
+  const count = t(a.studies.enrolled, { enrolled: formatNumber(locale, study.enrolled), target: formatNumber(locale, study.target) })
   return (
     <div>
       <div
@@ -105,12 +103,12 @@ export function EnrolmentBar({ study }: { study: Study }) {
         aria-valuemax={study.target}
         aria-valuenow={study.enrolled}
         aria-label={a.study.enrolment}
+        aria-valuetext={count}
+        title={compact ? count : undefined}
       >
         <div className="h-full rounded-full bg-primary" style={{ width: `${pct}%` }} />
       </div>
-      <p className="tnum mt-1.5 text-xs text-muted-foreground">
-        {t(a.studies.enrolled, { enrolled: formatNumber(locale, study.enrolled), target: formatNumber(locale, study.target) })}
-      </p>
+      {!compact && <p className="tnum mt-1.5 text-xs text-muted-foreground">{count}</p>}
     </div>
   )
 }
@@ -147,7 +145,7 @@ export function StudyCard({ state, study }: { state: DemoState; study: Study }) 
           <span className="tnum font-medium">{t(a.studies.reward, { amount: formatToken(locale, study.reward) })}</span>
           <span className="text-muted-foreground">{t(a.studies.weeks, { weeks: study.durationWeeks })}</span>
         </div>
-        <EnrolmentBar study={study} />
+        <EnrolmentBar study={study} compact />
       </div>
     </article>
   )

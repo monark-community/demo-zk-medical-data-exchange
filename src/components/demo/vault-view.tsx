@@ -3,7 +3,6 @@
 import { CheckIcon, Loader2Icon, MinusIcon, PlusIcon, Trash2Icon, XCircleIcon } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import { useState } from "react"
-import { toast } from "sonner"
 
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
@@ -82,7 +81,6 @@ export function VaultView() {
     }
     importRecord(source)
     setImp({ phase: "done", source })
-    toast.success(`${name} · ${v.stored}`)
   }
 
   const ordered = [...ALL_SOURCES].sort((x, y) => {
@@ -93,9 +91,8 @@ export function VaultView() {
   return (
     <div className="space-y-8">
       <PageHead
-        eyebrow={v.eyebrow}
         title={v.title}
-        body={v.body}
+        info={v.info}
         actions={
           <Button onClick={() => setSheetOpen(true)}>
             <PlusIcon aria-hidden="true" />
@@ -152,12 +149,12 @@ export function VaultView() {
                         <dt className="text-xs text-muted-foreground">{v.cid}</dt>
                         <dd className="flex items-center gap-2">
                           <span aria-hidden="true" className="hatch h-2 w-8 shrink-0 rounded-[2px]" />
-                          <span className="truncate font-mono text-xs" title={r.cid}>
+                          <span
+                            className="truncate font-mono text-xs"
+                            title={`${r.cid} · ${t(v.size, { size: r.sizeKb, entries: r.entries })}`}
+                          >
                             {shortHex(r.cid, 12, 6)}
                           </span>
-                        </dd>
-                        <dd className="tnum mt-0.5 text-xs text-muted-foreground">
-                          {t(v.size, { size: r.sizeKb, entries: r.entries })}
                         </dd>
                       </div>
                     </dl>
@@ -185,7 +182,6 @@ export function VaultView() {
               </li>
             ))}
           </ul>
-          <p className="mt-4 border-t border-rule pt-3 text-xs text-muted-foreground">{copy.common.sampleNotice}</p>
         </aside>
       </div>
 
@@ -266,7 +262,6 @@ export function VaultView() {
               onClick={() => {
                 if (toDelete) deleteRecord(toDelete)
                 setToDelete(null)
-                toast(v.deleted)
               }}
             >
               {v.deleteConfirm}

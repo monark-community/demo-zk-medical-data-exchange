@@ -1,6 +1,6 @@
 "use client"
 
-import { CheckIcon, Loader2Icon, WalletIcon } from "lucide-react"
+import { Loader2Icon, WalletIcon } from "lucide-react"
 import { useState } from "react"
 
 import { SealStamp } from "@/components/diagrams/seal-stamp"
@@ -38,17 +38,8 @@ export function Gate() {
   return (
     <section className="ruled mx-auto grid max-w-5xl items-center gap-10 rounded-lg border bg-card px-5 py-10 sm:px-10 sm:py-14 md:grid-cols-[1.2fr_0.8fr]">
       <div>
-        <p className="eyebrow text-seal">{g.eyebrow}</p>
-        <h1 className="mt-3 text-3xl leading-tight font-medium sm:text-4xl">{g.title}</h1>
+        <h1 className="text-3xl leading-tight font-medium sm:text-4xl">{g.title}</h1>
         <p className="mt-4 text-muted-foreground">{g.body}</p>
-        <ul className="mt-6 space-y-2">
-          {g.points.map((pt) => (
-            <li key={pt} className="flex gap-2.5 text-[0.9375rem]">
-              <CheckIcon className="mt-1 size-4 shrink-0 text-primary" strokeWidth={2.5} aria-hidden="true" />
-              {pt}
-            </li>
-          ))}
-        </ul>
         <Button size="lg" className="mt-8 w-full sm:w-auto" onClick={connect} disabled={busy}>
           {busy ? <Loader2Icon className="animate-spin" aria-hidden="true" /> : <WalletIcon aria-hidden="true" />}
           {phase === "connecting" ? g.connecting : g.connect}

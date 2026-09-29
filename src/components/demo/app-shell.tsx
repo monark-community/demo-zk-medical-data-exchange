@@ -195,8 +195,7 @@ export function AppShell({ copy, homeLabel, children }: { copy: AppCopy; homeLab
                 })}
               </ul>
             </nav>
-            <div className="mt-auto space-y-3 border-t pt-4 text-xs text-muted-foreground">
-              <p>{copy.common.sampleNotice}</p>
+            <div className="mt-auto border-t pt-4 text-xs text-muted-foreground">
               <Link href={href(copy.locale)} className="inline-flex items-center gap-1.5 font-medium hover:text-foreground">
                 <ArrowLeftIcon className="size-3.5" aria-hidden="true" />
                 {s.backToSite}
@@ -294,10 +293,6 @@ export function AppShell({ copy, homeLabel, children }: { copy: AppCopy; homeLab
           </ul>
         </SheetContent>
       </Sheet>
-
-      <footer className="hidden border-t py-4 text-center text-xs text-muted-foreground lg:block">
-        {copy.common.demoNotice} · {copy.common.sampleNotice}
-      </footer>
 
       <WalletPrompt />
       {/* Toasts sit over the app header, never over the content they report on. */}
