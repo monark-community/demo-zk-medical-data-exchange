@@ -28,7 +28,7 @@ const statusConfig: Record<
   confirmed: {
     icon: CheckCircle2Icon,
     label: "Confirmed",
-    tone: "text-emerald-600 dark:text-emerald-400",
+    tone: "text-primary",
   },
   failed: {
     icon: XCircleIcon,
@@ -70,7 +70,7 @@ function TxStatus({
       data-slot="tx-status"
       data-status={status}
       className={cn(
-        "inline-flex items-center gap-2 rounded-md border bg-card px-3 py-2 text-sm shadow-xs",
+        "inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 rounded-md border bg-card px-3 py-2 text-sm",
         className
       )}
       {...props}

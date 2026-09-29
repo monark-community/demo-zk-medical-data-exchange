@@ -73,7 +73,7 @@ function WalletAvatar({
     <div
       data-slot="wallet-avatar"
       aria-hidden="true"
-      className={cn("shrink-0 overflow-hidden rounded-full", className)}
+      className={cn("shrink-0 overflow-hidden rounded-full saturate-[0.55] sepia-[0.25]", className)}
       style={{ width: size, height: size, ...style }}
       {...props}
     >
