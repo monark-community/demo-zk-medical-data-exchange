@@ -58,9 +58,20 @@ async function newPage(browser, { locale, w, theme }) {
 }
 
 const shot = async (page, v, name, fullPage = false) => {
-  if (fullPage) await page.evaluate(() => window.scrollTo(0, 0))
-  await page.waitForTimeout(fullPage ? 500 : 300)
-  await page.screenshot({ path: `${OUT}${v.locale}-${v.w}-${v.theme}-${name}.png`, fullPage })
+  const path = `${OUT}${v.locale}-${v.w}-${v.theme}-${name}.png`
+  if (fullPage) {
+    // Grow the viewport to the page height so sticky header and tab bar sit where a reader sees them.
+    await page.evaluate(() => window.scrollTo(0, 0))
+    const height = await page.evaluate(() => document.documentElement.scrollHeight)
+    await page.setViewportSize({ width: sizes[v.w].width, height: Math.max(height, sizes[v.w].height) })
+    await page.waitForTimeout(500)
+    await page.screenshot({ path })
+    await page.setViewportSize(sizes[v.w])
+    console.log("  ✓", `${v.locale}-${v.w}-${v.theme}-${name}`)
+    return
+  }
+  await page.waitForTimeout(300)
+  await page.screenshot({ path, fullPage })
   console.log("  ✓", `${v.locale}-${v.w}-${v.theme}-${name}`)
 }
 

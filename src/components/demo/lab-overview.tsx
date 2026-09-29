@@ -95,7 +95,7 @@ export function LabOverview() {
                     <td className="hidden px-4 py-4 align-top md:table-cell">
                       <EnrolmentBar study={s} />
                     </td>
-                    <td className="tnum hidden px-4 py-4 text-right align-top sm:table-cell">
+                    <td className="tnum hidden px-4 py-4 text-right align-top whitespace-nowrap sm:table-cell">
                       {formatToken(locale, s.reward * s.target)} tUSDC
                     </td>
                     <td className="px-4 py-4 text-right align-top">

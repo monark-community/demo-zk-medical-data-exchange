@@ -13,7 +13,7 @@ import type {
 
 /**
  * Seed data for the demo. All people, labs and studies are fictional; the
- * records are a single believable sample patient, never the visitor's own.
+ * records are a single believable sample patient, never the visitor’s own.
  */
 
 export const DEMO_NETWORK = "Sepolia"
@@ -78,7 +78,7 @@ function studies(now: number): Study[] {
       },
       question: {
         en: "Does twice-weekly home blood pressure monitoring change HbA1c over 16 weeks in adults with type 2 diabetes?",
-        fr: "La prise de tension à domicile deux fois par semaine modifie-t-elle l'HbA1c sur 16 semaines chez les adultes vivant avec un diabète de type 2 ?",
+        fr: "La prise de tension à domicile deux fois par semaine modifie-t-elle l’HbA1c sur 16 semaines chez les adultes vivant avec un diabète de type 2 ?",
       },
       lab: LAB_NAME,
       owner: LAB_ADDRESS,
@@ -106,7 +106,7 @@ function studies(now: number): Study[] {
       },
       question: {
         en: "Is long-term metformin use associated with shorter or more fragmented sleep, measured by a consumer sleep ring?",
-        fr: "L'usage prolongé de la metformine est-il associé à un sommeil plus court ou plus fragmenté, mesuré par une bague de sommeil ?",
+        fr: "L’usage prolongé de la metformine est-il associé à un sommeil plus court ou plus fragmenté, mesuré par une bague de sommeil ?",
       },
       lab: "Harbourline Sleep Institute",
       owner: seededAddress("harbourline"),
@@ -130,11 +130,11 @@ function studies(now: number): Study[] {
       id: "childhood-asthma",
       title: {
         en: "Adult outcomes of childhood-onset asthma",
-        fr: "L'asthme apparu dans l'enfance, à l'âge adulte",
+        fr: "L’asthme apparu dans l’enfance, à l’âge adulte",
       },
       question: {
         en: "How do lung-related hospital visits in adulthood differ between people whose asthma began before age 12 and later-onset asthma?",
-        fr: "Les consultations hospitalières liées aux poumons à l'âge adulte diffèrent-elles selon que l'asthme est apparu avant 12 ans ou plus tard ?",
+        fr: "Les consultations hospitalières liées aux poumons à l’âge adulte diffèrent-elles selon que l’asthme est apparu avant 12 ans ou plus tard ?",
       },
       lab: "Ashgrove Respiratory Cohort",
       owner: seededAddress("ashgrove"),
@@ -187,7 +187,7 @@ function studies(now: number): Study[] {
       },
       question: {
         en: "Do weeks with more walking predict better self-reported mood the following week in adults aged 45 to 65?",
-        fr: "Les semaines où l'on marche davantage annoncent-elles une meilleure humeur la semaine suivante chez les 45 à 65 ans ?",
+        fr: "Les semaines où l’on marche davantage annoncent-elles une meilleure humeur la semaine suivante chez les 45 à 65 ans ?",
       },
       lab: "Maple Row Digital Health Lab",
       owner: seededAddress("maple-row"),
@@ -278,7 +278,7 @@ function proposals(now: number): Proposal[] {
       },
       summary: {
         en: "Labs would see cohort estimates only when at least 20 vaults match, making it harder to single out someone with a rare combination of conditions.",
-        fr: "Les labos ne verraient une estimation de cohorte que si au moins 20 coffres correspondent, ce qui rend plus difficile d'isoler une personne ayant une combinaison rare de conditions.",
+        fr: "Les labos ne verraient une estimation de cohorte que si au moins 20 coffres correspondent, ce qui rend plus difficile d’isoler une personne ayant une combinaison rare de conditions.",
       },
       status: "open",
       yes: 1284,
@@ -291,11 +291,11 @@ function proposals(now: number): Proposal[] {
       number: 15,
       title: {
         en: "Require a separate opt-in for AI model training",
-        fr: "Exiger un consentement distinct pour l'entraînement de modèles d'IA",
+        fr: "Exiger un consentement distinct pour l’entraînement de modèles d’IA",
       },
       summary: {
         en: "Studies that train machine-learning models on consented fields would have to show a second, unticked checkbox on the consent slip.",
-        fr: "Les études qui entraînent des modèles d'apprentissage automatique sur les champs consentis devraient afficher une deuxième case, non cochée, sur le bon de consentement.",
+        fr: "Les études qui entraînent des modèles d’apprentissage automatique sur les champs consentis devraient afficher une deuxième case, non cochée, sur le bon de consentement.",
       },
       status: "open",
       yes: 2106,
@@ -328,7 +328,7 @@ function proposals(now: number): Proposal[] {
       },
       summary: {
         en: "Studies could ask for a full date of birth instead of an age band after consent.",
-        fr: "Les études pourraient demander la date de naissance complète plutôt qu'une tranche d'âge après le consentement.",
+        fr: "Les études pourraient demander la date de naissance complète plutôt qu’une tranche d’âge après le consentement.",
       },
       status: "rejected",
       yes: 402,
