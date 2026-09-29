@@ -253,6 +253,7 @@ const en = {
         proof: "proof · 256 bytes",
         fields: "consented fields, encrypted to the lab’s key",
         verdict: "eligible · nullifier",
+        labBox: "A count of proven-eligible participants, then only the fields each slip names",
       },
     },
     worked: {

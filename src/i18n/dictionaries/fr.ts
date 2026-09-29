@@ -254,6 +254,7 @@ const fr: Dictionary = {
         proof: "preuve · 256 octets",
         fields: "champs consentis, chiffrés pour la clé du labo",
         verdict: "admissible · nullificateur",
+        labBox: "Un décompte de participants admissibles, puis seulement les champs nommés par chaque bon",
       },
     },
     worked: {
