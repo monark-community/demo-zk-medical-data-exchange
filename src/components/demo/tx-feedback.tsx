@@ -51,17 +51,21 @@ export function TxFeedback({
         />
       )}
       {state.phase === "failed" && (
-        <div role="alert" className="flex flex-col gap-3 rounded-md border border-destructive/40 bg-card p-3 sm:flex-row sm:items-center">
-          <p className="flex flex-1 gap-2 text-destructive">
+        <div role="alert" className="space-y-3 rounded-md border border-destructive/40 bg-card p-3">
+          <p className="flex gap-2 text-destructive">
             <XCircleIcon className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
             <span>{state.error === "rejected" ? x.rejected : x.failed}</span>
           </p>
-          {state.hash && <TxStatus status="failed" hash={state.hash} label={x.statusFailed} className="self-start" />}
-          {onRetry && (
-            <Button size="sm" variant="outline" onClick={onRetry} className="shrink-0">
-              <RotateCcwIcon aria-hidden="true" />
-              {x.retry}
-            </Button>
+          {(state.hash || onRetry) && (
+            <div className="flex flex-wrap items-center gap-2">
+              {state.hash && <TxStatus status="failed" hash={state.hash} label={x.statusFailed} />}
+              {onRetry && (
+                <Button size="sm" variant="outline" onClick={onRetry}>
+                  <RotateCcwIcon aria-hidden="true" />
+                  {x.retry}
+                </Button>
+              )}
+            </div>
           )}
         </div>
       )}

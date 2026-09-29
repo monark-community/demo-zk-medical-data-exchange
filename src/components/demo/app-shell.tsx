@@ -207,7 +207,7 @@ export function AppShell({ copy, homeLabel, children }: { copy: AppCopy; homeLab
         <main
           id="main"
           tabIndex={-1}
-          className={cn("min-w-0 flex-1 px-4 pt-6 pb-28 outline-none sm:px-6 lg:px-10 lg:pt-8 lg:pb-16")}
+          className={cn("min-w-0 flex-1 px-4 pt-6 pb-10 outline-none sm:px-6 lg:px-10 lg:pt-8 lg:pb-16")}
         >
           {!state ? (
             <p role="status" className="py-20 text-center text-muted-foreground">
@@ -224,7 +224,7 @@ export function AppShell({ copy, homeLabel, children }: { copy: AppCopy; homeLab
       {connected && (
         <nav
           aria-label={s.nav}
-          className="fixed inset-x-0 bottom-0 z-40 border-t bg-background/95 pb-[env(safe-area-inset-bottom)] lg:hidden"
+          className="sticky bottom-0 z-40 border-t bg-background/95 pb-[env(safe-area-inset-bottom)] lg:hidden"
         >
           <ul className="mx-auto grid max-w-lg" style={{ gridTemplateColumns: `repeat(${role === "patient" ? 5 : 4}, minmax(0, 1fr))` }}>
             {mobileNav.map((item) => {

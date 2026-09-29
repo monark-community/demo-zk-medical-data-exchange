@@ -27,7 +27,7 @@ export function WalletPrompt() {
 
   return (
     <Dialog open={!!prompt} onOpenChange={(open) => !open && prompt?.resolve(false)}>
-      <DialogContent closeLabel={p.reject} className="max-w-md gap-5">
+      <DialogContent closeLabel={copy.common.close} className="max-w-md gap-5">
         <DialogHeader>
           <p className="eyebrow text-seal">{p.title}</p>
           <DialogTitle>{summary?.title}</DialogTitle>

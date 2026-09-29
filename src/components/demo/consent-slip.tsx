@@ -138,8 +138,9 @@ export function ConsentSlip({
         <span aria-hidden="true" className="absolute -top-2 -left-2 hidden size-4 rounded-full border bg-background sm:block" />
         <span aria-hidden="true" className="absolute -bottom-2 -left-2 hidden size-4 rounded-full border bg-background sm:block" />
         <SealStamp size="sm" className={cn(ended && "border-muted-foreground text-muted-foreground [&>span]:border-muted-foreground/60")} />
-        <dl className="min-w-0 space-y-1.5 text-xs">
+        <div className="min-w-0 space-y-1.5 text-xs">
           <p className="eyebrow text-muted-foreground">{s.stub}</p>
+          <dl className="space-y-1.5">
           {proofId && (
             <div>
               <dt className="text-muted-foreground">{s.proof}</dt>
@@ -156,13 +157,14 @@ export function ConsentSlip({
               </dd>
             </div>
           )}
+          </dl>
           {grantedAt && (
-            <div className="text-muted-foreground">
+            <p className="text-muted-foreground">
               {t(s.granted, { date: formatDate(locale, grantedAt, false) })}
               {block ? ` · ${t(s.block, { block: formatNumber(locale, block) })}` : ""}
-            </div>
+            </p>
           )}
-        </dl>
+        </div>
       </div>
     </div>
   )

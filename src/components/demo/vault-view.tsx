@@ -206,13 +206,13 @@ export function VaultView() {
                     <div className="min-w-0">
                       <p className="font-medium">{src.name}</p>
                       <p className="text-sm text-muted-foreground">{src.detail}</p>
-                      <p className="mt-1 flex flex-wrap gap-1">
+                      <div className="mt-1 flex flex-wrap gap-1">
                         {SOURCES[source].kinds.map((k) => (
                           <Badge key={k} variant="secondary">
                             {labels.kindNames[k]}
                           </Badge>
                         ))}
-                      </p>
+                      </div>
                     </div>
                     {present ? (
                       <span className="inline-flex shrink-0 items-center gap-1 text-xs text-primary">

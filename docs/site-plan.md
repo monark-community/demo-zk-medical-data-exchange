@@ -84,7 +84,9 @@ All routes live under `/{locale}` (`en`, `fr`); `/` redirects by `Accept-Languag
 **Decision:** the app is split into sub-routes (not tabs on one page) so each flow has a shareable URL and a clear back path, and so screenshots can target each step.
 
 **Header** (site): wordmark left; links "How it works", "Demo"; right: EN/FR switch, theme toggle, primary "Try the demo". Mobile: wordmark + menu button opening a sheet with links, switches, action.
-**App header**: wordmark, "Demo · simulated data" badge, role switch (Patient / Lab), network badge, wallet button, demo controls. App nav: Patient: Overview, Vault, Studies, Consents, Council, Activity. Lab: Overview, Studies, New study, Council, Activity. Mobile: bottom tab bar (5 items max; Activity lives in the overflow sheet).
+**App header**: wordmark (links back to the site), "Demo · simulated data" badge, network badge (desktop), the registry `connect-wallet` account menu, and Demo controls (fail next transaction, slow network, reset, plus EN/FR and theme). Desktop: a left rail with the role switch (Patient / Lab) and the nav. Patient nav: Overview, Vault, Studies, Consents, Council, Activity. Lab nav: Overview, New study, Council, Activity. Mobile: the role switch sits in a bar under the header, and a sticky bottom tab bar holds Overview, Vault, Studies, Consents and More (Council, Activity, back to site); the lab bar has its four items directly.
+
+**Decision:** the role follows the route (`/app/lab*` is the lab, `/app`, vault, studies and consents are the patient; council and activity keep the last role). Switching role navigates to that role's overview, so there is never a page shown for the wrong role. The two demo accounts (patient, "Beaulac Cardiometabolic Lab") live in the same demo wallet.
 **Footer**: one-line description; links (How it works, Demo, Credits); "Demo · simulated data" notice; "Not medical advice · sample records only"; "Built with Monark" credit (muted, 12–13px, links to monark.io); GitHub repo link; © year.
 
 ## 5. Feature highlights
@@ -234,7 +236,8 @@ Disclaimers (both languages, everywhere required): "Demo · simulated data" / «
 | accent (manila) | `#EADFC4` | `#3A3120` |
 | accent-foreground | `#4A3808` | `#F0DDAF` |
 | seal (custom) | `#8A5D0C` ochre ink | `#E0B55A` |
-| border / input | `#D6CEBD` | `#2C3A33` |
+| border (decorative hairlines) | `#D6CEBD` | `#2C3A33` |
+| input (control outlines, switch track) | `#8F8877` (3.35:1 on card) | `#66786D` (3.56:1 on card) |
 | ring | `#1F4D3A` | `#8CC7A7` |
 | destructive | `#A8321F` brick | `#F08A76` |
 | chart-1…5 | `#1F4D3A` `#946A1A` `#5B7768` `#A8321F` `#3E5C76` | `#8CC7A7` `#E0B55A` `#A9BFB2` `#F08A76` `#8FB0CC` |
@@ -318,7 +321,9 @@ Built in code: the glass (hero, study page), step diagram, "What leaves your vau
 
 ## 12. Build notes
 
-- Next.js App Router, TypeScript strict, `src/`, pnpm, Tailwind v4, shadcn/ui on the Monark UI registry (theme installed then fully re-themed; registry components used: button, badge, dialog, sheet, tabs, switch, input, label, slider, checkbox, tooltip, sonner, accordion, progress, dropdown-menu, `connect-wallet`/`wallet`, `token-amount`, `network-badge`, `tx-status`).
-- i18n: typed dictionaries (`src/i18n/dictionaries/en.ts`, `fr.ts`), locale routes, `proxy.ts` redirect by `Accept-Language`, hreflang alternates.
-- Demo state: tiny external store persisted to `localStorage` under one key, every access in try/catch; "Reset demo" in demo controls.
-- Toasts: top-right on desktop, top-center below the app header on mobile (the bottom is the tab bar); proof and seal animations happen inside the page, never under a toast.
+- Next.js 16 App Router, TypeScript strict, `src/`, pnpm, Tailwind v4, shadcn/ui on the Monark UI registry (theme installed then fully re-themed; registry components used: button, badge, dialog, sheet, switch, input, textarea, select, label, slider (extended to label one thumb per value), checkbox, sonner, accordion, progress, dropdown-menu (through `connect-wallet`), `connect-wallet`/`wallet`, `token-amount` (patched to use the locale's decimal separator), `network-badge`, `tx-status`). Registry components were given localizable close labels and restyled (radius, borders, no shadows). `connect-wallet` and `wallet` were copied from the registry JSON because the CLI could not resolve the bare `wallet` dependency.
+- Only extra dependency beyond the stack: `react-jazzicon` (required by the registry `wallet` avatar, desaturated to fit the palette). `playwright` is a dev dependency for screenshots.
+- i18n: typed dictionaries (`src/i18n/dictionaries/en.ts`, `fr.ts`, and a small `errors.ts` for the client error boundary), locale routes, `proxy.ts` redirect by `Accept-Language`, hreflang alternates, typographic apostrophes in both languages. Studies a visitor publishes keep the title they typed in both languages.
+- Demo state: tiny external store persisted to `localStorage` under `cura-demo-v1`, every access in try/catch; "Reset demo" in Demo controls.
+- Toasts: top-center, laid over the app header on every width, so they never cover the panel, slip or form they report on; transaction status is always shown inline next to the action as well.
+- The sitemap lists the marketing pages, `/app`, `/app/studies` and `/app/council` in both languages; `/pricing` is excluded.
