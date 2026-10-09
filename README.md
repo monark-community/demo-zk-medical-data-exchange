@@ -14,7 +14,7 @@ Cura is an independent product incubated by [Monark](https://www.monark.io).
 
 ## Run it locally
 
-Requirements: Node.js 22 and pnpm 10.
+Requirements: Node.js 24 and pnpm 10.
 
 ```bash
 pnpm install
