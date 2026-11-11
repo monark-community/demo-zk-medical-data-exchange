@@ -14,7 +14,7 @@ Cura is an independent product incubated by [Monark](https://www.monark.io).
 
 ## Run it locally
 
-Requirements: Node.js 22 and pnpm 10.
+Requirements: Node.js 22.23.4 or newer on the 22 line, and pnpm 10.
 
 ```bash
 pnpm install
@@ -82,7 +82,7 @@ docs/                    site plan, asset credits, screenshots
 
 ## Deploy to Vercel
 
-Import the repository in Vercel and keep the defaults: framework Next.js, install `pnpm install`, build `pnpm build`. No `vercel.json` and no environment variables are needed; the Node version comes from `engines` in `package.json`. Every page prerenders except studies published inside the demo, which render on demand.
+Import the repository in Vercel and keep the defaults: framework Next.js, install `pnpm install`, build `pnpm build`. No `vercel.json` and no environment variables are needed; the Node version comes from `engines` in `package.json`. `pnpm build` and `pnpm start` stop on a Node.js release exposed to CVE-2026-111497. Every page prerenders except studies published inside the demo, which render on demand.
 
 ## Disclaimers
 
